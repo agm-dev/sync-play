@@ -8,6 +8,7 @@
     "default_popup": "popup.html",
     "default_title": "Sync your video player with your friends!"
   },
+  "content_security_policy": "script-src 'self' https://wzrd.in/standalone/uuid%2Fv1@latest; object-src 'self'",
   "permissions": [
     "activeTab"
   ]
