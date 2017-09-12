@@ -1,0 +1,39 @@
+.disconnected {
+  background-color: red;
+}
+
+.connected {
+  background-color: lightgreen;
+}
+
+#state {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 5px 0;
+}
+
+#popup {
+  width: 250px;
+  margin: 20px;
+}
+
+button, input {
+  margin: 4px 0;
+}
+
+body {
+  margin: 0px;
+}
+
+#code-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 30px;
+}
+
+#code {
+  width: 99%;
+}
