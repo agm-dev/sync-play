@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   console.log('Content loaded');
   const generateCodeBtn = document.querySelector('#generate-code');
+  const useCodeBtn = document.querySelector('#use-code');
   const code = document.querySelector('#code');
 
   // Load code if there is one saved:
@@ -25,6 +26,34 @@ document.addEventListener('DOMContentLoaded', function() {
        console.log('Saved code on local storage');
     }
     code.select();
+    const peer = new Peer(code.value, { key: 'ylmnk6r4bdibe29' });
+    console.log(`Configuring new peer: ${code.value}`);
+    peer.on('connection', conn => {
+      console.log(`Someone has connected to our peer: ${conn}`);
+      conn.on('data', data => {
+        console.log(`Received data: ${data}`);
+      });
+      conn.send('Welcome to our connection, dude!');
+    });
+    peer.on('open', id => {
+      console.log(`Open peer connection with ID: ${id}`);
+    });
+  }, false);
+
+  // Use code button:
+  useCodeBtn.addEventListener('click', function() {
+    console.log('CLICK: Use Code Button');
+    const peerId = code.value || '';
+    if (code.value.length <= 0) return console.log('ERROR: Generate a code before click on use code button');
+    const peer = new Peer({ key: 'ylmnk6r4bdibe29' });
+    const conn = peer.connect(code.value);
+    conn.on('open', () => {
+      console.log(`Connected to peer with ID: ${code.value}`);
+      conn.on('data', data => {
+        console.log(`Received data: ${data}`);
+      });
+      conn.send('Hi, i am the new guy!');
+    });
   }, false);
 
 }, true);
