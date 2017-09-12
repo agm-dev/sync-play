@@ -11,5 +11,11 @@
   "content_security_policy": "script-src 'self' https://wzrd.in; object-src 'self'",
   "permissions": [
     "activeTab"
-  ]
+  ],
+  "content_scripts": [{
+      "matches": ["<all_urls>"],
+      "js": ["content-script.js"]
+    }
+  ],
+  "web_accessible_resources": ["script.js"]
 }
