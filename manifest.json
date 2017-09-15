@@ -8,14 +8,11 @@
     "default_popup": "popup.html",
     "default_title": "Sync your video player with your friends!"
   },
-  "content_security_policy": "script-src 'self' https://wzrd.in; object-src 'self'",
   "permissions": [
-    "activeTab"
+    "storage"
   ],
   "content_scripts": [{
       "matches": ["<all_urls>"],
-      "js": ["content-script.js"]
-    }
-  ],
-  "web_accessible_resources": ["script.js"]
+      "js": ["js/sync-play.js"]
+    }]
 }
