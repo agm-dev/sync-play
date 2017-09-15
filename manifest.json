@@ -11,8 +11,14 @@
   "permissions": [
     "storage"
   ],
-  "content_scripts": [{
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["js/lib/peer.min.js"]
+    },
+    {
       "matches": ["<all_urls>"],
       "js": ["js/sync-play.js"]
-    }]
+    }
+  ]
 }
