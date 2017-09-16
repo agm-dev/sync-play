@@ -54,11 +54,15 @@ document.addEventListener('DOMContentLoaded', function() {
   const useCodeBtn = document.querySelector('#use-code');
   const code = document.querySelector('#code');
 
+  chrome.storage.local.get('id', item => code.value = item.id)
+  chrome.storage.local.get('connected', item => handleConection(item.connected))
+
   // Generate code button:
   generateCodeBtn.addEventListener('click', function() {
     console.log('CLICK: Generate Code Button');
     code.value = generateCode();
-    saveState({ id: code.value });
+    saveState({ action: 'disconnect' })
+    saveState({ id: code.value, action: 'create' });
     code.select();
   }, false);
 
