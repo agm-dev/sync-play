@@ -7,7 +7,7 @@ const PEER_SERVER_HOST = 'agm-dev-peerjs-server.herokuapp.com'
 let state = {}
 let peer
 let connections = []
-let video
+let video = document.querySelector('#player-container video')
 
 
 // Functions:
@@ -61,25 +61,32 @@ const sendSignal = signal => connections.map(conn => {
   conn.send({ state: signal })
 })
 
+const setVideoListeners = v => {
+  v.addEventListener('pause', function() {
+    if (peer && connections.length) {
+      sendSignal('pause')
+    }
+  }, false)
+
+  v.addEventListener('play', function() {
+    if (peer && connections.length) {
+      sendSignal('play')
+    }
+  }, false)
+}
+
 
 // Listeners:
 
-document.addEventListener('DOMContentLoaded', function() {
-  video = document.querySelector('#player-container video')
+let interval = setInterval(() => {
   if (video) {
-    video.addEventListener('pause', function() {
-      if (peer && connections.length) {
-        sendSignal('pause')
-      }
-    }, false)
-
-    video.addEventListener('play', function() {
-      if (peer && connections.length) {
-        sendSignal('play')
-      }
-    }, false)
+    setVideoListeners(video)
+    clearInterval(interval)
+    console.log('success on setVideoListeners')
+  } else {
+    video = document.querySelector('#player-container video')
   }
-})
+}, 200)
 
 chrome.storage.onChanged.addListener(function(changes, namespace) {
   for (var key in changes) {

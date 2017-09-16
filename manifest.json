@@ -18,7 +18,8 @@
     },
     {
       "matches": ["<all_urls>"],
-      "js": ["js/sync-play.js"]
+      "js": ["js/sync-play.js"],
+      "run_at": "document_end"
     }
   ]
 }
